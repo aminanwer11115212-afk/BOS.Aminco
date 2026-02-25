@@ -1,0 +1,156 @@
+:root{
+  --brand: #2563EB;
+  --brand-2: #16A34A;
+  --radius: 14px;
+}
+
+html, body {
+  font-family: "Cairo", system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+code { direction: ltr; unicode-bidi: bidi-override; }
+.table th, .table td { vertical-align: middle; }
+
+.navbar .navbar-brand .brand-mark{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(37,99,235,0.12);
+  color: var(--brand);
+  font-size: 18px;
+}
+
+.card{
+  border-radius: var(--radius);
+}
+
+.btn{
+  border-radius: 12px;
+}
+
+.form-control, .form-select{
+  border-radius: 12px;
+}
+
+.badge{
+  border-radius: 999px;
+}
+
+.table-hover tbody tr:hover{
+  background: rgba(37,99,235,0.06);
+}
+
+tr.row-low {
+  background: rgba(245,158,11,0.10);
+}
+
+tr.row-out {
+  background: rgba(220,38,38,0.10);
+}
+
+tr.row-disabled {
+  background: rgba(220,38,38,0.08);
+}
+tr.row-disabled td:first-child{
+  border-right: 4px solid rgba(220,38,38,0.65);
+}
+
+/* Invoice */
+.invoice-box{
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Receipt (Thermal) template */
+.invoice-receipt{ display: none; }
+
+.receipt-box{
+  max-width: var(--receipt-width, 420px);
+  margin: 0 auto;
+  /* لتجهيز معاينة المقاس على الشاشة عند اختيار الطباعة */
+  min-height: var(--receipt-height, 0);
+}
+
+.receipt-content{
+  font-size: 13px;
+}
+
+.receipt-table th, .receipt-table td{
+  padding: 2px 4px;
+  vertical-align: top;
+}
+
+.receipt-table code{
+  font-size: 11px;
+}
+
+body.receipt-mode .invoice-standard{ display:none; }
+body.receipt-mode .invoice-receipt{ display:block; }
+
+.invoice-header{
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.invoice-meta{
+  text-align: left;
+}
+
+.invoice-meta code{
+  font-size: 14px;
+}
+
+.invoice-watermark{
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.12;
+  font-size: 96px;
+  font-weight: 800;
+  transform: rotate(-18deg);
+}
+
+.invoice-watermark.show{ display:flex; }
+
+.invoice-content{
+  position: relative;
+  z-index: 1;
+}
+
+@media print{
+  nav, footer, .no-print{
+    display:none !important;
+  }
+  body{
+    background: white !important;
+  }
+  .card{
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .invoice-watermark{
+    display:flex;
+  }
+
+  /* Receipt mode print tweaks */
+  body.receipt-mode .invoice-watermark{
+    display:none !important;
+  }
+  body.receipt-mode .receipt-box{
+    width: var(--receipt-width, 80mm);
+    max-width: var(--receipt-width, 80mm);
+    margin: 0;
+  }
+  body.receipt-mode .receipt-content{
+    padding: 0 !important;
+  }
+}
